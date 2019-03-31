@@ -20,7 +20,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-      - image: pocga/pedidosga:latest
+      - image: pocga/pedidosga:[image-tag]
         imagePullPolicy: Always
         name: cache
         env:

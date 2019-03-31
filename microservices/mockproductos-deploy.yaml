@@ -20,7 +20,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-      - image: pocga/mockproductos:latest
+      - image: pocga/mockproductos:[image-tag]
         imagePullPolicy: Always
         name: mockproductos
         ports:

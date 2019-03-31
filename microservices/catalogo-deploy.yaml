@@ -20,16 +20,24 @@ spec:
         version: "1.0"
     spec:
       containers:
-      - image: pocga/catalogoga
+      - image: pocga/catalogoga:[image-tag]
         imagePullPolicy: Always
         name: catalogoga
         env:
-        - name: MONGO_HOST
-          value: "mongo"
-        - name: MONGO_PORT
-          value: "27017"
-        - name: MOCK_URL
-          value: "http://mockproductos:8080/ProductosMock/AllProductos"          
+        - name: PORT
+          value: "4000"
+        - name: MOR_DEV
+          value: "development"
+        - name: MONGO_ROUTE
+          value: "mongodb://mongo:27017/producto"
+        - name: PORTRED
+          value: "6379"
+        - name: HOSTRED
+          value: "redis"
+        - name: MOCKP_ROUTE
+          value: "http://ec2-52-206-33-92.compute-1.amazonaws.com:30001/ProductosMock/AllProductos"
+        - name: MOCKC_ROUTE
+          value: "http://ec2-52-206-33-92.compute-1.amazonaws.com:30001/ProductosMock/AllCategorias"
         ports:
         - containerPort: 4000
           protocol: TCP
