@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy-cassandra
+  namespace: techshopga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: back
+      app: cassandra
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: cassandra
+        role: db
+        tier: back
+        version: "3.11"
+    spec:
+      containers:
+      - image: cassandra:3.11
+        imagePullPolicy: Always
+        name: db-cassandra
+        ports:
+        - containerPort: 9042
+          protocol: TCP
+        volumeMounts:
+          - name: cassandra-data
+            mountPath: "/var/lib/cassandra"
+      volumes:
+        - name: cassandra-data
+          hostPath:
+            path: /var/lib/cassandra
+            type: DirectoryOrCreate

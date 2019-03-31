@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy-mongo
+  namespace: techshopga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: back
+      app: mongo
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: mongo
+        role: db
+        tier: back
+        version: "4.0"
+    spec:
+      containers:
+      - image: mongo:4.0
+        imagePullPolicy: Always
+        name: db-mongo
+        ports:
+        - containerPort: 27017
+          protocol: TCP
+        volumeMounts:
+          - name: mongo-data
+            mountPath: "/etc/mongo"
+      volumes:
+        - name: mongo-data
+          hostPath:
+            path: /var/lib/mongo
+            type: DirectoryOrCreate

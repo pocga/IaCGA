@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    role: svc-mockproductos
+    tier: back
+  name: mockproductos
+  namespace: techshopga
+spec:
+  selector:
+    role: microservice
+    app: mockproductos
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30001
+  type: NodePort

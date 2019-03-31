@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy-catalogoga
+  namespace: techshopga
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: back
+      app: catalogoga
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: catalogoga
+        role: microservice
+        tier: back
+        platfform: Node.js
+        version: "1.0"
+    spec:
+      containers:
+      - image: pocga/catalogoga
+        imagePullPolicy: Always
+        name: catalogoga
+        env:
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MOCK_URL
+          value: "http://mockproductos:8080/ProductosMock/AllProductos"          
+        ports:
+        - containerPort: 4000
+          protocol: TCP

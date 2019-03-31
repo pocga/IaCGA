@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy-mockproductos
+  namespace: techshopga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: back
+      app: mockproductos
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: mockproductos
+        role: microservice
+        tier: back
+        platfform: java-Soap-Ui-mock
+        version: "1.0"
+    spec:
+      containers:
+      - image: pocga/mockproductos:latest
+        imagePullPolicy: Always
+        name: mockproductos
+        ports:
+        - containerPort: 8080
+          protocol: TCP

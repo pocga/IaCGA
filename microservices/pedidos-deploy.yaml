@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deploy-pedidosga
+  namespace: techshopga
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: back
+      app: pedidosga
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: pedidosga
+        role: microservice
+        tier: back
+        platfform: java-Spring-Boot
+        version: "1.0"
+    spec:
+      containers:
+      - image: pocga/pedidosga:latest
+        imagePullPolicy: Always
+        name: cache
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        ports:
+        - containerPort: 8080
+          protocol: TCP

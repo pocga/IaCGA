@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    role: svc-pedidosga
+    tier: back
+  name: pedidosga
+  namespace: techshopga
+spec:
+  selector:
+    role: microservice
+    app: pedidosga
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30002
+  type: NodePort    
