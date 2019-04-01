@@ -20,7 +20,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-      - image: pocga/catalogoga:[image-tag]
+      - image: pocga/catalogoga:IMAGETAG
         imagePullPolicy: Always
         name: catalogoga
         env:
